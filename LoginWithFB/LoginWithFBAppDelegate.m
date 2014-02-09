@@ -7,14 +7,29 @@
 //
 
 #import "LoginWithFBAppDelegate.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @implementation LoginWithFBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    //FB Code Begin
+    [FBLoginView class];
+    [FBProfilePictureView class];
+    //FB Code End
+    
     return YES;
 }
+
+//FB Code Begin
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL wasHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+    
+    return wasHandled;
+}
+//FB Code End
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
